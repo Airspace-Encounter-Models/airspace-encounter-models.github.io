@@ -1,0 +1,31 @@
+# /_data/authors.yml
+
+Andrew Weinert:
+  name        : "Andrew Weinert"
+  bio         : "MIT Lincoln Laboratory"
+  avatar      : "assets/images/bio-photo-aweinert.jpg"
+  links:
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "mailto:andrew.weinert@ll.mit.edu"
+    - label: "Website"
+      icon: "fas fa-fw fa-link"
+      url: "https://aweinert.com"
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/aweinert_mit"
+
+Marc Brittain:
+  name        : "Marc Brittain"
+  bio         : "MIT Lincoln Laboratory"
+  avatar      : "/assets/images/bio-photo-2.jpg"
+  links:
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      #url: "mailto:marc.brittain@ll.mit.edu"
+    - label: "Website"
+      icon: "fas fa-fw fa-link"
+      url: "https://marcbrittain.github.io/"
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      #url: "https://twitter.com/aweinert_mit"
