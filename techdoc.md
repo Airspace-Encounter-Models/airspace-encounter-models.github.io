@@ -57,22 +57,22 @@ With the exception of the uncorrelated UAS model, each encounter model of manned
 
 # Manned Aircraft
 
-## Manned Correlated Model
+## Manned Correlated Extended Model
 
-A Bayesian network used to generate random close encounters between transponder-equipped (cooperative) aircraft. This is the only model that explicitly models two aircraft.
+Bayesian network model trained on observed encounters between transponder-equipped (cooperative) aircraft. The training data were processed pairs of tracks of aircraft equipped with mode [Mode 3A/C](https://en.wikipedia.org/wiki/Air_traffic_control_radar_beacon_system) transponders and observed by one of over 200 ground-based primary and secondary surveillance radars managed by the RADES. The extended correlated model was trained from more than 500,000 flight hours from cooperative aircraft, and the extended uncorrelated from more than 290,000 flight hours of 1200-code aircraft.
 
 <details> <summary> N. Underhill, E. Harkleroad, R. Guendel, D. Maki, and M. Edwards, “Correlated Encounter Model for Cooperative Aircraft in the National Airspace System; Version 2.0,” Massachusetts Institute Technology Lincoln Laboratory Lexington United States, May 2018.</summary>
 <p>
 
 {% highlight tex %}
 @techreport{underhillCorrelatedEncounterModel2018,
-  title = {Correlated {{Encounter Model}} for {{Cooperative Aircraft}} in the {{National Airspace System}}; {{Version}} 2.0},
+  title = {Correlated {Encounter Model} for {Cooperative Aircraft} in the {National Airspace System}; {Version} 2.0},
   url = {https://apps.dtic.mil/docs/citations/AD1051496},
   author = {Underhill, N.K and Harkleroad, E.P and Guendel, R.E and Weinert, A.J and Maki, D.E and Edwards, M.W.M},
   type = {Project {{Report}}},
   language = {en},
   number = {ATC-440},
-  institution = {{Massachusetts Institute of Technology, Lincoln Laboratory}},
+  institution = {Massachusetts Institute of Technology, Lincoln Laboratory},
   month = may,
   year = {2018},
   pages = {140}
@@ -98,9 +98,29 @@ A Bayesian network used to generate random close encounters between transponder-
 </p>
 </details>
 
+## Manned Correlated Terminal Model
+
+A set of Bayesian networks tailored to address structured terminal operations, i.e., correlations between trajectories and the airfield and each other. It was specifically trained to support [RTCA SC-228](https://www.rtca.org/sc-228/) development of the [DO-365](https://my.rtca.org/nc__store?search=do-365) minimum operational performance standard (MOPS). The model is comprised to two main elements. The first component, the encounter geometry model, describes the geometrical conditions of two encounter aircraft at their point of closest approach. The second component, the trajectory generation model, then describes the flight path for each aircraft leading to and continuing from their point of closest approach.
+
+<details> <summary> A. Weinert, N. Underhill, C. Serres, and R. Gundel, “Correlated Bayesian Model of Aircraft Encounters in the Terminal Area Given a Straight Takeoff or Landing,” Preprints, 2021.</summary>
+<p>
+
+{% highlight tex %}
+@article{weinert2021correlated,
+  title={Correlated Bayesian Model of Aircraft Encounters in the Terminal Area Given a Straight Takeoff or Landing},
+  author={Weinert, Andrew and Underhill, Ngaire and Serres, Christine and Guendel, Randal},
+  year={2021},
+  doi={10.20944/preprints202111.0051.v1},
+  url={https://www.preprints.org/manuscript/202111.0051/v1},
+  publisher={Preprints}
+}
+{% endhighlight %}
+</p>
+</details>
+
 ## Manned Due Regard
 
-A Bayesian network trained using using the enhanced Traffic Management System (ETMS) data feed that was provided by the Volpe Center to describe aircraft operating in international airspace.
+A Bayesian network trained using using the ETMS data feed that was provided by the [Volpe Center](https://www.volpe.dot.gov/) to describe aircraft operating in international airspace. Training data included operations over the Atlantic and Pacific oceans and consisted of over 10,000 flight hours.
 
 <details> <summary> J. D. Griffith, M. W. Edwards, R. M. Miraflor, and A. J. Weinert, “Due Regard Encounter Model Version 1.0,” Massachusetts Institute of Technology, Lincoln Laboratory, Lexington, MA, Project Report ATC-397, Aug. 2013.</summary>
 <p>
@@ -124,7 +144,7 @@ A Bayesian network trained using using the enhanced Traffic Management System (E
 
 ## Manned Helicopter Air Ambulance Model
 
-A Bayesian network trained using flight operational quality assurance (FOQA) data provided by a Massachusetts-based HAA provider.
+A Bayesian network trained from an estimated 2,526,000 observations across 758 flight hours. The training observations were sourced from FOQA DFDR data provided by a Massachusetts-based HAA provider. This model should only be used to simulate HAA rotorcraft operations, it has not been validated to be representative of other rotorcraft operations.
 
 *Note a technical description of this model has not been publicly released yet. This model was developed to support sUAS well clear research. Until model-specific documentation is released, please cite the following paper.*
 
@@ -148,56 +168,51 @@ A Bayesian network trained using flight operational quality assurance (FOQA) dat
 </p>
 </details>
 
-## Manned Littoral Model
+## Manned Uncorrelated-Conventional Models
 
-A Bayesian network model that describes how aircraft behavior in the littoral regions of the United States. This model has been deprecated by the manned uncorrelated model 2.0.
+Uncorrelated models assume aircraft behavior is not dependent on air traffic services or nearby aircraft. While trained using observations of cooperative aircraft equipped with transponders, they are often used as surrogates to model noncooperative aircraft not equipped with transponders. Uncorrelated models have been trained using either observations of 1200-code aircraft equipped with [Mode 3A/C](https://en.wikipedia.org/wiki/Air_traffic_control_radar_beacon_system) transponders observed by a radar managed by the RADES or from observations by the [OpenSky Network](https://github.com/openskynetwork) of [ADS-B](https://www.faa.gov/nextgen/programs/adsb/) equipped aircraft.
 
 *Note that Appendix C in CASSATT-2 describes a revised process from the early encounter models for initializing uncorrelated encounters and estimating metrics.*
 
-<details> <summary> M. W. Edwards, “Encounter Models for the Littoral Regions of the National Airspace System” Massachusetts Institute of Technology, Lincoln Laboratory, CASSATT-2, Sep. 2010.</summary>
+<details> <summary> N. Underhill, and A. Weinert, "Applicability and Surrogacy of Uncorrelated Airspace Encounter Models at Low Altitudes." Journal of Air Transportation, 2021, pp. 1-5, doi: 10.1109/HPEC43674.2020.9286229.</summary>
 <p>
 
 {% highlight tex %}
-@techreport{edwardsEncounterModelsLittoral2010,
-	title = {Encounter {Models} for the {Littoral} {Regions} of the {National} {Airspace} {System}},
-	url = {https://apps.dtic.mil/docs/citations/ADA529083},
-	language = {en},
-	number = {CASSATT-2},
-	urldate = {2019-01-16},
-	institution = {Massachusetts Institute of Technology, Lincoln Laboratory},
-	author = {Edwards, Matthew W.},
-	month = sep,
-	year = {2010}
+@article{underhill2021applicability,
+  title={Applicability and Surrogacy of Uncorrelated Airspace Encounter Models at Low Altitudes},
+  author={Underhill, Ngaire and Weinert, Andrew},
+  journal={Journal of Air Transportation},
+  volume = {29},
+  number = {3},
+  pages = {137-141},
+  year = {2021},
+  publisher={American Institute of Aeronautics and Astronautics},
+  url={https://doi.org/10.2514/1.D0254},
+  doi={10.2514/1.D0254}
 }
 {% endhighlight %}
 </p>
 </details>
 
-## Manned Uncorrelated-Conventional Models
-
-A Bayesian network model that assume the aircraft trajectories are independent and that there is no dependence on aircraft behavior before a collision avoidance system acts. It is assumed that air traffic control or an active unmanned traffic management system is not providing guidance. This uncorrelated assumption enables individual aircraft trajectories can be modeled independently and then combined in a separate encounter initialization process
-
-<details> <summary> A. Weinert, N. Underhill, B. Gill, and A. Wicks, “Processing of Crowdsourced Observations of Aircraft in a High Performance Computing Environment,” arXiv:2008.00861 [cs], Aug. 2020.</summary>
+<details> <summary> A. Weinert, N. Underhill, B. Gill, and A. Wicks, “Processing of Crowdsourced Observations of Aircraft in a High Performance Computing Environment,”2020 IEEE High Performance Extreme Computing Conference (HPEC), 2020, pp. 1-6, doi: 10.1109/HPEC43674.2020.9286229.</summary>
 <p>
 
 {% highlight tex %}
 @article{weinertProcessingCrowdsourcedObservations2020,
-  url = {http://arxiv.org/abs/2008.00861},
-  archivePrefix = {arXiv},
-  eprinttype = {arxiv},
-  eprint = {2008.00861},
-  primaryClass = {cs},
-  title = {Processing of {{Crowdsourced Observations}} of {{Aircraft}} in a {{High Performance Computing Environment}}},
-  author = {Weinert, Andrew and Underhill, Ngaire and Gill, Bilal and Wicks, Ashley},
-  month = aug,
-  year = {2020},
-  keywords = {Computer Science - Computational Engineering; Finance; and Science,Computer Science - Distributed; Parallel; and Cluster Computing,E.2,H.3,I.6.5}
+	author={Weinert, Andrew and Underhill, Ngaire and Gill, Bilal and Wicks, Ashley},
+  	booktitle={2020 IEEE High Performance Extreme Computing Conference (HPEC)}, 
+  	title={Processing of Crowdsourced Observations of Aircraft in a High Performance Computing Environment}, 
+  	year={2020},
+  	volume={},
+  	number={},
+  	pages={1-6},
+  	doi={10.1109/HPEC43674.2020.9286229}}
 }
 {% endhighlight %}
 </p>
 </details>
 
-<details> <summary> A. Weinert, N. Underhill, and A. Wicks, “Developing a Low Altitude Manned Encounter Model Using ADS-B Observations,” in 2019 IEEE Aerospace Conference, Big Sky, MT, 2019.</summary>
+<details> <summary> A. Weinert, N. Underhill, and A. Wicks, “Developing a Low Altitude Manned Encounter Model Using ADS-B Observations,” in 2019 IEEE Aerospace Conference, Big Sky, MT, 2019, pp. 1-8, doi: 10.1109/AERO.2019.8741848.</summary>
 <p>
 
 {% highlight tex %}
@@ -207,7 +222,7 @@ A Bayesian network model that assume the aircraft trajectories are independent a
 	doi = {10.1109/AERO.2019.8741848},
 	address = {Big Sky, MT},
 	language = {en},
-	booktitle = {2019 {IEEE} {Aerospace} {Conference}},
+	title={Developing a Low Altitude Manned Encounter Model Using ADS-B Observations}, 
 	author = {Weinert, Andrew and Underhill, Ngaire and Wicks, Ashley},
 	month = mar,
 	year = {2019},
@@ -258,6 +273,25 @@ A Bayesian network model that assume the aircraft trajectories are independent a
 </p>
 </details>
 
+<details> <summary> M. W. Edwards, “Encounter Models for the Littoral Regions of the National Airspace System” Massachusetts Institute of Technology, Lincoln Laboratory, CASSATT-2, Sep. 2010.</summary>
+<p>
+
+{% highlight tex %}
+@techreport{edwardsEncounterModelsLittoral2010,
+	title = {Encounter {Models} for the {Littoral} {Regions} of the {National} {Airspace} {System}},
+	url = {https://apps.dtic.mil/docs/citations/ADA529083},
+	language = {en},
+	number = {CASSATT-2},
+	urldate = {2019-01-16},
+	institution = {Massachusetts Institute of Technology, Lincoln Laboratory},
+	author = {Edwards, Matthew W.},
+	month = sep,
+	year = {2010}
+}
+{% endhighlight %}
+</p>
+</details>
+
 <details> <summary> M. J. Kochenderfer, J. K. Kuchar, L. P. Espindle, and J. D. Griffith, “Uncorrelated Encounter Model of the National Airspace System version 1.0,” MIT Lincoln Laboratory, Lexington, Massachusetts, Project Report ATC-345, 2008.</summary>
 <p>
 
@@ -277,7 +311,7 @@ A Bayesian network model that assume the aircraft trajectories are independent a
 
 ## Manned Uncorrelated-Unconventional Model
 
-A set of nine individual Bayesian network models encompassing ultralights, gliders, balloons, and airships. This model is based on more than 96,000 unconventional aircraft tracks.
+A set of nine individual Bayesian network models encompassing ultralights, gliders, balloons, and airships. This model is based on more than 96,000 unconventional aircraft tracks. These models were developed developed in response to the uncorrelated-conventional model not being sufficiently representative all types of noncooperative aircraft.
 
 <details> <summary> M. W. Edwards, M. J. Kochendedrfer, J. K. Kuchar, and L. P. Espindle, “Encounter Models for Unconventional Aircraft, Version 1.0,” Massachusetts Institute of Technology, Lincoln Laboratory, Project Report ATC-348, 2009.</summary>
 <p>
@@ -311,10 +345,10 @@ This model is applicable for some commercial operations, such as long linear inf
 {% highlight tex %}
 @inproceedings{weinertRepresentativeSmallUAS2020,
   url = {https://doi.org/10.2514/6.2020-0741},
-  address = {{Orlando, FL}},
-  title = {Representative {{Small UAS Trajectories}} for {{Encounter Modeling}}},
-  booktitle = {{{AIAA Scitech}} 2020 {{Forum}}},
-  publisher = {{American Institute of Aeronautics and Astronautics}},
+  address = {Orlando, FL},
+  title = {Representative {Small UAS Trajectories} for {Encounter Modeling}},
+  booktitle = {AIAA Scitech 2020 Forum},
+  publisher = {American Institute of Aeronautics and Astronautics},
   doi = {10.2514/6.2020-0741},
   author = {Weinert, Andrew J. and Edwards, Matthew and Alvarez, Luis and Katz, Sydney Michelle},
   month = jan,

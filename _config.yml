@@ -28,7 +28,7 @@ locale                   : "en-US"
 title                    : "Airspace Encounter Models"
 title_separator          : "-"
 subtitle                 : "Statistical models of aircraft behavior" # site tagline that appears below site title in masthead
-name                     : # "MIT Lincoln Laboratory"
+name                     : "MIT Lincoln Laboratory"
 description              : "Statistical models of how aircraft behave during close encounters"
 url                      : https://airspace-encounter-models.github.io/ # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
