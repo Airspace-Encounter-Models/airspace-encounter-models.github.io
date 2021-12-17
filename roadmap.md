@@ -21,9 +21,9 @@ Mark | Description
 ------------ | -------------
 bullet | work not started
 check mark | work completed
-:runner: | on-going work
-:muscle: | stretch goal
-:red_circle: | missing link
+🏃‍♀️ | on-going work
+💪 | stretch goal
+🔴 | missing link
 
 ## Values
 
@@ -53,7 +53,7 @@ For 2022, we'll particularly focus in the following themes.
 - [ ] Improve unit testing, including developing across multiple repositories unit tests for the first time
 - [ ] Integrate [`MISS_HIT`](https://misshit.org/), a set of source code quality tools for MATLAB, into development workflow
 - [ ] In preparation for future Python development, update contributing guidelines with Python specific guidance
-- [ ] :muscle: Investigate update to contributing guidelines with Julia specific guidance
+- [ ] 💪 Investigate update to contributing guidelines with Julia specific guidance
 
 # Models
 
@@ -68,29 +68,29 @@ For 2022, we'll particularly focus in the following themes.
 - [ ] Reduce the [`em-processing-opensky`](https://github.com/Airspace-Encounter-Models/em-processing-opensky) repository dependency on the MATLAB mapping toolbox
 - [ ] Streamline relationship and workflow between [`em-download-opensky`](https://github.com/Airspace-Encounter-Models/em-download-opensky) and [`em-processing-opensky`](https://github.com/Airspace-Encounter-Models/em-processing-opensky)
 - [ ] Add support for air navigation obstacles identified by the [Irish Aviation Authority (IAA)](https://www.iaa.ie/commercial-aviation/airspace/air-navigation-obstacles)
-- [ ] :muscle: Add support for long linear infrastructure information provided by [Transpower in New Zealand](https://data-transpower.opendata.arcgis.com/)
-- [ ] :muscle: Explore support for obstacles and features of interest data provided by [Ordnance Survey Ireland](https://data-osi.opendata.arcgis.com/)
-- [ ] :muscle: Investigate training a model based on latitude, longitude, and altitude information sourced from imagery metadata in the [Low Altitude Disaster Imagery (LADI) Dataset](https://github.com/ladi-dataset)
+- [ ] 💪 Add support for long linear infrastructure information provided by [Transpower in New Zealand](https://data-transpower.opendata.arcgis.com/)
+- [ ] 💪 Explore support for obstacles and features of interest data provided by [Ordnance Survey Ireland](https://data-osi.opendata.arcgis.com/)
+- [ ] 💪 Investigate training a model based on latitude, longitude, and altitude information sourced from imagery metadata in the [Low Altitude Disaster Imagery (LADI) Dataset](https://github.com/ladi-dataset)
 
 ## Sampling
 
 - [ ] Update the `UncorEncounterModel` MATLAB class in [`em-model-manned-bayes`](https://github.com/airspace-Encounter-Models/em-model-manned-bayes) to support unconventional (e.g. balloons, hang gliders, etc.) models
 - [ ] Release more baseline encounter sets of sampled encounters
-- [ ] :runner: Document basic practices and communicate why sampling approach described in relatively older technical reports (i.e. ATC-404) is not recommended
-- [ ] :muscle: Investigate prototyping a MATLAB class for the due regard model
-- [ ] :muscle: Investigate prototyping a MATLAB class for the helicopter air ambulance uncorrelated model
-- [ ] :muscle: Investigate prototyping a MATLAB class for the RADES-based correlated en route model
+- [ ] 🏃‍♀️ Document basic practices and communicate why sampling approach described in relatively older technical reports (i.e. ATC-404) is not recommended
+- [ ] 💪 Investigate prototyping a MATLAB class for the due regard model
+- [ ] 💪 Investigate prototyping a MATLAB class for the helicopter air ambulance uncorrelated model
+- [ ] 💪 Investigate prototyping a MATLAB class for the RADES-based correlated en route model
 
 # Install / Update
 
-- [ ] :muscle: Improve cross platform XML parsing in shell scripts
-- [ ] :muscle: Explore containerizing multiple repositories into a single package
+- [ ] 💪 Improve cross platform XML parsing in shell scripts
+- [ ] 💪 Explore containerizing multiple repositories into a single package
 
 # Website
 
-- [ ] :runner: Improve communication of best practices and development updates through blog posts
-- [ ] :runner: Refresh technical documentation and remove outdated links
-- [ ] :runner: Refresh Zotero [airspace-encounter-models group library](https://www.zotero.org/groups/2359172/airspace-encounter-models/library)
+- [ ] 🏃‍♀️ Improve communication of best practices and development updates through blog posts
+- [ ] 🏃‍♀️ Refresh technical documentation and remove outdated links
+- [ ] 🏃‍♀️ Refresh Zotero [airspace-encounter-models group library](https://www.zotero.org/groups/2359172/airspace-encounter-models/library)
 - [ ] Continue to incrementally improve presentation and discoverability
 - [ ] Archive and mark for deprecation the `em-overview` repository once the GitHub pages website has been sufficiently updated and established
 
