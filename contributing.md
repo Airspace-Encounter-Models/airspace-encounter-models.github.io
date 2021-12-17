@@ -12,10 +12,6 @@ We encourage the use of the [GitHub Issues](https://guides.github.com/features/i
 
 Due to the encounter models routine use in aviation research, we like to minimize the risk of inadvertent bugs or software challenges to maintain the encounter models as a trusted benchmark. To encourage traceability, development should occur via [forking](https://guides.github.com/activities/forking/).
 
-# Roadmap
-
-No public technology roadmap for development is available yet. As the encounter models transition to a more community-focused model, this may change.
-
 # Workflow
 
 A variety of organizations from academia, federal agencies, federal funded research and development centers (FFRDC), and industry have supported encounter model development. Each organization has different policies on release review and procedures to disseminate content. Organizations may also have their own enterprise self-hosted version control systems.

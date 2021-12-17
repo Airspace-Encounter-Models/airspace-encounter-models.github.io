@@ -1,0 +1,19 @@
+---
+layout: single
+title:  "Airspace Encounter Models 2022 Roadmap"
+date:   2021-12-10 00:00:00 -0500
+categories: roadmap
+author: Andrew Weinert
+share: true
+toc: true
+---
+
+A software roadmap is a high-level strategic plan consisting of the vision and objectives for development.
+
+Prior to technology transition as an open source software project, there was no cohesive developmental roadmap across all models and research. Rather potential development was noted as future work in technical reports or peer-reviewed articles for a specific model. As reports and articles are static, over time the discussed future work becomes increasingly out of date or irrelevant.
+
+Our roadmap looks out 12-18 months and we establishes topics we intend to work on. We develop it based on the findings we made over the course of the last year, community feedback, and in face-to-face discussions. Our roadmap uses the [Visual Studio Code Roadmap as a template](https://github.com/microsoft/vscode/wiki/Roadmap). Since most of the team are staff at [MIT Lincoln Laboratory](https://www.ll.mit.edu/), a federally funded research and development center (FFRDC), execution of this roadmap is dependent resources and funding provided by MIT Lincoln Laboratory's sponsors, such as the [Federal Aviation Adminstration (FAA)](https://www.faa.gov/) and [National Aeronautics and Space Administration (NASA)](https://www.nasa.gov/).
+
+When we execute our roadmap, we keep learning and our assessment of some of the topics listed may change. As a result, we may add or drop topics as we go. Around December 2023, we plan on coming together to develop the next roadmap. To promote community development to help meet the roadmap objectives, we'll also build a good collection of GitHub issues labeled `help wanted` and `good first issue` across repositories.
+
+You can find a link to the most current roadmap on the masthead at the top of the website or by using this [link]({{ site.baseurl }}{% link roadmap.md %}).
