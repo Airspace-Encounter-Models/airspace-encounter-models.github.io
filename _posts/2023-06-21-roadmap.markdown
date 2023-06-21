@@ -1,0 +1,282 @@
+---
+layout: single
+title:  "Airspace Encounter Models 2023 Roadmap: Prioritizing Metropolitan Airspace"
+date:   2023-06-21 00:00:00 -0500
+categories: roadmap
+author: Andrew Weinert
+share: true
+toc: true
+---
+
+The new 2023 roadmap was designed to support integration of drones and advanced air mobility (AAM) aircraft into the airspace. This directly accomplishes goals of the Federal Aviation Administration (FAA) Aircraft Certification Service (AIR) and UAS Integration Office (AUS). To support industry, the roadmap is aligned to support RTCA SC-147 and SC-228 activities to develop detect and avoid (DAA) and collision avoidance systems to mitigate collision risk in Class B and the airspaces surrounding the busiest airports. The majority of development by MIT LL has been tasked by the FAA UAS Integration Office. Specifically, the FAA A11L.UAS.2 research task is the primary sponsor of development by MIT Lincoln Laboratory (MIT LL) and they have been the primary sponsor since 2019. 
+
+The roadmap was designed to facilitate contributions of a trained Dynamic Bayesian Networks to model correlation between aircraft while further supporting the broader research and safety community by pre calculating airspace-based metadata and human annotated datasets. These contributions are first intended to directly support RTCA SC-147 and RTCA SC-228 and then by the broader community response to the expected FAA notice of proposed rulemaking (NPRM) for drone regulations.
+
+# Distribution Statement
+
+DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+
+This material is based upon work supported by the Federal Aviation Administration under Air Force Contract No. FA8702-15-D-0001. Any opinions, findings, conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the Federal Aviation Administration.
+
+© 2023 Massachusetts Institute of Technology.
+
+Delivered to the U.S. Government with Unlimited Rights, as defined in DFARS Part 252.227-7013 or 7014 (Feb 2014). Notwithstanding any copyright notice, U.S. Government rights in this work are defined by DFARS 252.227-7013 or DFARS 252.227-7014 as detailed above. Use of this work other than as specifically authorized by the U.S. Government may violate any copyrights that exist in this work.
+
+This document is derived from work done for the FAA (and possibly others), it is not the direct product of work done for the FAA. The information provided herein may include content supplied by third parties. Although the data and information contained herein has been produced or processed from sources believed to be reliable, the Federal Aviation Administration makes no warranty, expressed or implied, regarding the accuracy, adequacy, completeness, legality, reliability, or usefulness of any information, conclusions or recommendations provided herein. Distribution of the information contained herein does not constitute an endorsement or warranty of the data or information provided herein by the Federal Aviation Administration or the U.S. Department of Transportation. Neither the Federal Aviation Administration nor the U.S. Department of Transportation shall be held liable for any improper or incorrect use of the information contained herein and assumes no responsibility for anyone’s use of the information. The Federal Aviation Administration and U.S. Department of Transportation shall not be liable for any claim for any loss, harm, or other damages arising from access to or use of data information, including without limitation any direct, indirect, incidental, exemplary, special or consequential damages, even if advised of the possibility of such damages. The Federal Aviation Administration shall not be liable for any decision made or action taken, in reliance on the information contained herein.
+
+# Introduction
+
+A software roadmap is a high-level strategic plan consisting of the vision and objectives for development.
+
+Our roadmap looks out 12-18 months and we establishes topics we intend to work on. We develop it based on the findings we made over the course of the last year, community feedback, and in face-to-face discussions. The previous 2022 roadmap was released about 16 months ago and discussions with the community were held in December 2022 and January 2023 to inform updates to the roadmap. 
+
+Our roadmap uses the [Visual Studio Code Roadmap as a template](https://github.com/microsoft/vscode/wiki/Roadmap). Since most of the team are staff at [MIT Lincoln Laboratory](https://www.ll.mit.edu/), a federally funded research and development center (FFRDC), execution of this roadmap is dependent on resources and funding provided by MIT Lincoln Laboratory's sponsors, such as the [Federal Aviation Administration (FAA)](https://www.faa.gov/) and [National Aeronautics and Space Administration (NASA)](https://www.nasa.gov/). Please coordinate with Deepak Chauhan from FAA ANG regarding resources provided by the FAA A11L.UAS.2 research task. 
+
+You can find a link to the most current roadmap on the masthead at the top of the website or by using this [link]({{ site.baseurl }}{% link roadmap.md %}).
+
+# Looking Ahead
+
+The Bayesian mathematical foundation of the encounter models have remained unchanged since 2008. This has been driven by adoption by the aviation standards community, need for trust in the models, and legacy development before the current wave of AI/ML research.
+
+A crucial requirement of the encounter models is trust and understandability. Bayesian Networks have practically been used for decades and the underlying mathematics of conditional probabilities are well understood. Bayesian Networks also are easy to parse and understand, there are no "black box" challenges of a lack of understandability often associated with neural networks and other modern AI/ML techniques. While understanding and characterizing AI models have drastically improved in the recent years, feedback from RTCA and ASTM emphasized the importance of understandability of the Bayesian encounter models because of their use in evaluating safety critical systems. Furthermore, with the technology transition as an open-source software project in 2019-2020, we prioritized adoption and support of the existing mathematical framework rather than fundamentally change the underlying mathematics when first building the encounter models software community. 
+
+For context, the first Dynamic Bayesian Network uncorrelated encounter models were released in [November 2008](https://www.ll.mit.edu/sites/default/files/publication/doc/2018-12/Kochenderfer_2008_ATC-345_WW-18178.pdf), while Python 3.0 was released a month later in December 2008. Leading AI/ML frameworks of Keras ([March 2015](https://blog.keras.io/introducing-keras-10.html#:~:text=Keras%20was%20initially%20released%20a%20year%20ago%2C%20late%20March%202015.)), TensorFlow ([November 2015](https://www.wired.com/2015/11/google-open-sources-its-artificial-intelligence-engine/)), and PyTorch ([September 2016](https://github.com/pytorch/pytorch/releases/tag/v0.1.1)) were all initially released years after the first major update to the uncorrelated encounter models in [2013](https://apps.dtic.mil/sti/citations/ADA589697). 
+
+Now in 2023, with an established open source community and advancements in AI/ML research, we seek to position the encounter models to support traditional machine learning models like Bayesian Networks while also leveraging and inform more modern techniques like Gaussian mixture models (GMMs), autoencoders, and more (i.e. transformers, long short-term memory). We also want to facilitate more supervised learning by the community. In the future we will consider integration of configuration tools (e.g. [Hydra](https://github.com/facebookresearch/hydra), [Gin](https://github.com/google/gin-config)), and additional AI/ML tools and techniques. 
+
+Our future technical direction was informed by a review of what was achieved under the previous roadmap and recent AI/ML research by the aviation community.
+
+# Review of Themes from Previous Roadmap
+
+The 2022 roadmap established six themes. Here we summarize the previous themes and overview some notable developments motivated by these themes.
+
+Three themes focused on improving documentation, reducing closed source dependencies, and improving DevOps. These themes motivated the use of [MISS_HIT](https://misshit.org/), a free and open source software that includes a configurable style checker and code formatter for MATLAB; and improved documentation in example run scripts, like [`RUN_uncor`](https://github.com/Airspace-Encounter-Models/em-model-manned-bayes/blob/6843389cede1fd9be4622c0672595b32b9948863/code/matlab/RUN_uncor.m) from [`em-model-manned-bayes`](https://github.com/Airspace-Encounter-Models/em-model-manned-bayes). To reduce closed dependencies, we've increasingly leveraged the [FAA 28 Day National Airspace System Resources (NASR)](https://www.faa.gov/air_traffic/flight_info/aeronav/Aero_Data/NASR_Subscription/) subscription and begun prototyping Python software to sample the Bayesian Network encounter models.    
+
+Two other themes focused on developing the best available models and promoting community development. In response, we updated the foundational MATLAB [`EncounterModel`](https://github.com/Airspace-Encounter-Models/em-model-manned-bayes/blob/6843389cede1fd9be4622c0672595b32b9948863/code/matlab/@EncounterModel/EncounterModel.m) class to be more generalized and have less explicit assumptions, such as no longer assuming a specific order of variables. We also updated MATLAB classes to better support most of the uncorrelated unconventional and due regard models. Changes to the uncorrelated models of traditional aircraft, released alongside the new roadmap, were informed by community discussions. Furthermore, we saw increased community engagement, with software enhancements and bug fixes first identified and resolved by non-MIT LL community members.
+
+The last 2022 theme was a focus on model development on the complex airspace over metropolitan areas. The past 12-18 months have prioritized prototyping concepts and characterizing airspace to inform a future model. An initial model of pairwise encounters in terminal airspace was released in early 2022. Lessons learned from this model and NASR-based capabilities led to new concepts that were first implemented in the the uncorrelated models of traditional aircraft. Lessons learned from the successful updates to the uncorrelated models directly informed the technical objectives and motivations for the 2023 roadmap, which will further prioritize this theme of modeling metropolitan areas.
+
+# Highlights Since Publishing Previous Roadmap
+
+To summarize developments, since publishing the last roadmap, we highlight four peer-reviewed papers, two primarily authored by MIT LL encounter model team and two authored by others; and one technical report. These articles all cite previous encounter model literature. This list is not comprehensive and there is other literature that have recently leveraged the encounter models.
+
+For each paper we highlight encounter model related technical contributions and how the research informed policy and standardization efforts, particularly to support objectives of the FAA AUS UAS Research, Engineering, & Analysis Division (AUS-300) and FAA AUS Safety and Integration Division (AUS-400). Furthermore applicants submitting waivers and safety cases to the FAA Aircraft Certification Service and Flight Standards Service are leveraging encounter model investments made by the FAA UAS Integration Office.
+
+## Release of Terminal Encounter Model 
+
+Foremost, an article describing a new correlated encounter model for pairwise encounters in FAA Class C, B, E, and G terminal  airspace was released in early 2022. A deliverable of the FAA A11L.UAS.2 task, this work was the release of an initial model of terminal operations with constraints imposed by the SC-228 DO-365 minimum operating performance (MOPS), such as only modeling when an aircraft landing or taking off via a straight trajectory encounters another aircraft landing or taking off, or transiting by any means. The model shares the Bayesian network foundation of other MIT LL trained encounter models but tailors those networks to address structured terminal operations, i.e., correlations between trajectories and the airfield and each other. The [`em-model-manned-bayes`](https://github.com/Airspace-Encounter-Models/em-model-manned-bayes) repository was updated with new software to generate trajectories from this model via rejection sampling. This article was followed by the ICNS 2022 conference paper, [_Leveraging Public Aeronautical Data to Characterize Aircraft Traffic Intent_](https://zenodo.org/record/6390978), which was another deliverable for the FAA A11L.UAS.2 task.
+
+### Highlights and Policy Use
+
+*  First MIT LL trained encounter model with variables that explicitly represent the structure expected while engaged in terminal operations
+*  [RTCA SC-228](https://www.rtca.org/sc-228/) provided the scope and key assumptions of the trained model
+*  Encounters sampled from this model and others supported the development of the [safety risk management modeling and simulation final report](https://doi.org/10.5281/zenodo.7778187) for the RTCA DO-365B MOPS for DAA Systems.  
+
+### BibTeX Citation
+{% highlight tex %}
+@Article{doi:10.3390/aerospace9020058,
+AUTHOR = {Weinert, Andrew and Underhill, Ngaire and Serres, Christine and Guendel, Randal},
+TITLE = {Correlated Bayesian Model of Aircraft Encounters in the Terminal Area Given a Straight Takeoff or Landing},
+JOURNAL = {Aerospace},
+VOLUME = {9},
+YEAR = {2022},
+NUMBER = {2},
+ARTICLE-NUMBER = {58},
+URL = {https://www.mdpi.com/2226-4310/9/2/58},
+ISSN = {2226-4310},
+DOI = {10.3390/aerospace9020058}
+}
+{% endhighlight %}
+
+## Metric Development and Terrain-Aware Encounter Model Sampling
+
+Also in early 2022, an AIAA Journal of Air Transportation article was published that proposed a quantitative smaller NMAC (sNMAC) criteria of a simultaneous loss of 50 ft horizontal separation and 15 ft vertical separation as a modeling and simulation surrogate of a midair collision when simulating encounters when two or more smaller drones are in close proximity to each other. Use of proposed criteria was demonstrated using generated trajectories sampled from and paired with using [`em-model-geospatial`](https://github.com/airspace-encounter-models/em-model-geospatial) and [`em-pairing-geospatial`](https://github.com/Airspace-Encounter-Models/em-pairing-geospatial). This research accelerated development of model sampling with respect to terrain and obstacles, while also enforcing assumptions of above ground level altitudes. The developed capabilities were generalized and integrated into [`em-model-manned-bayes`](https://github.com/Airspace-Encounter-Models/em-model-manned-bayes) to support models of crewed aircraft.
+
+### Highlights and Policy Use
+
+*  Demonstrated at scale capability to generate trajectories with respect to above ground level altitude and terrain
+*  sNMAC Metric adopted by RTCA SC-147 and used in the [DO-396](https://my.rtca.org/productdetails?id=a1BDm000000GuyIMAS) MOPS for Airborne Collision Avoidance System sXu (ACAS sXu); simulation results from sampled encounter models justified adoption by RTCA SC-147 
+*  Capability to consider obstacles during encounter generation which informed development of low altitude encounters to support RTCA and ASTM efforts
+
+### BibTeX Citation
+{% highlight tex %}
+@article{doi:10.2514/1.D0260,
+author = {Weinert, Andrew and Alvarez, Luis and Owen, Michael and Zintak, Benjamin},
+title = {Near Midair Collision Analog for Drones Based on Unmitigated Collision Risk},
+journal = {Journal of Air Transportation},
+volume = {30},
+number = {2},
+pages = {37-48},
+year = {2022},
+doi = {10.2514/1.D0260},
+URL = {https://doi.org/10.2514/1.D0260},
+}
+{% endhighlight %}
+
+## Encounters to Evaluate Speed Advisories
+
+Later in Summer 2022 at the AIAA AVIATION conference, Stanford University presented research on the effect of speed change advisories on the safety and operational efficiency of collision avoidance systems. This research was funded by the FAA to support [RTCA SC-147](https://www.rtca.org/sc-147/) and leveraged the airspace encounter models to create pairwise encounters to evaluate the speed change advisories. Their results show that while speed advisories are able to reduce collision risk, they are neither as safe nor as efficient as their horizontal and vertical counterparts. A video presentation of this paper can be found [here](https://doi.org/10.2514/6.2022-3824.vid).
+
+### Highlights and Policy Use
+
+*  Developed and simulated encounter set of close encounters between a drone and traditional crewed aircraft using concepts established in ([10.2514/6.2020-0741](https://doi.org/10.2514/6.2020-0741)).
+*  Simulation results directly informed the decision by RTCA SC-147 to not implement speed change advisories for a collision avoidance system intended to be used by rotorcraft and Advanced Air Mobility (AAM) aircraft
+
+### BibTeX Citation
+{% highlight tex %}
+@inbook{doi:10.2514/6.2022-3824,
+author = {Sydney M. Katz and Luis E. Alvarez and Michael Owen and Samuel Wu and Marc W. Brittain and Anshuman Das and Mykel J. Kochenderfer},
+title = {Collision Risk and Operational Impact of Speed Change Advisories as Aircraft Collision Avoidance Maneuvers},
+booktitle = {AIAA AVIATION 2022 Forum},
+chapter = {},
+pages = {},
+doi = {10.2514/6.2022-3824},
+URL = {https://doi.org/10.2514/6.2022-3824}, 
+{% endhighlight %}
+
+
+## Data Processing Workflow
+
+Next in September 2022, the AIAA Journal of Aerospace Information Systems published an article on research to identify the hazardous multithreat encounters with three or more aircraft to validate collision avoidance algorithms. This research leveraged the concepts, established by the airspace encounter model team, of using tracks observed by the crowd sourced ADS-B OpenSky Network to develop statistical models of aircraft behavior and of the data processing workflow to prepare tracks for analysis. Multiple attribute utility theory was used to identify the multithreat encounters. This project demonstrates the benefits of transitioning the airspace encounter models research as an open source community project, with multiple unaffiliated contributors, which extends the original objective of disseminating the research to the aviation safety community.
+
+### Highlights and Policy Use
+
+*  The [`em-processing-opensky`](https://github.com/Airspace-Encounter-Models/em-processing-opensky) repository and associated peer reviewed publications ([10.1109/AERO.2019.8741848](https://doi.org/10.1109/AERO.2019.8741848), [10.1109/HPEC43674.2020.9286229](10.1109/HPEC43674.2020.9286229), [10.1109/HPEC49654.2021.9622862](https://doi.org/10.1109/HPEC49654.2021.9622862), [10.3390/aerospace9020058](https://doi.org/10.3390/aerospace9020058)) informed the flight data acquisition and processing methods used to design algorithms to identify multithreat encounters of aircraft
+*  Prototyped algorithm under consideration to support further development of the terminal encounter model for RTCA SC-147 and SC-228
+
+### BibTeX Citation
+{% highlight tex %}
+@article{doi:10.2514/1.I011141,
+author = {Hu, Yang and Wang, Xiaoyan},
+title = {Identifying Multithreat Encounters for Collision Avoidance Algorithm Validation Using Multiattribute Utility Theory},
+journal = {Journal of Aerospace Information Systems},
+volume = {19},
+number = {11},
+pages = {747-752},
+year = {2022},
+doi = {10.2514/1.I011141},
+URL = {https://doi.org/10.2514/1.I011141},
+}
+{% endhighlight %}
+
+## sUAS Mid-Air Collision Likelihood
+
+Lastly in February 2023, [ASSURE published research on the midair collision (MAC) likelihood](https://assureuas.org/projects/suas-mid-air-collision-likelihood/) between a small drone and commercial transport aircraft, business jet, general aviation aircraft, and rotorcraft. ASSURE adapted the approach and results from previous MAC assessments, conducted by MIT LL, to estimate a wide range of impact conditions. They leveraged various open source technologies, including statistical encounter models and software to pair tracks to create encounters; the MIT LL published [DAA Evaluation of Guidance, Alerting, and Surveillance (DEGAS)](https://github.com/mit-ll/degas-core) simulation framework; and [V-COLLIDE](http://gamma.cs.unc.edu/V-COLLIDE/), a collision detection library for large environments, developed by University of North Carolina. Four types of crewed aircraft were evaluated for collisions against six types of small drones. A severity assessment was performed for the recorded MACs.
+
+### Highlights and Policy Use
+*  Developed encounter sets of encounters between traditional aircraft using the uncorrelated encounter models
+*  Indicated that the physically smaller size of small drone can be considered a passive midair collision mitigation for encounters with larger aircraft
+
+### BibTeX Citation
+{% highlight tex %}
+@report{assure:a47-a11l.uas.87-002,
+author = {Armando De Abreu and Gerardo Arboleda and Gerardo Olivares and Luis Gomez and Deepak Singh and Timothy Bruner and Tom Haritos and Katie Silas and Ryan Wallace and Andrew Weinert},
+title = {sUAS Mid Air Collision Likelihood - Final Report},
+year = {2023},
+pages = {233},
+URL = {https://assureuas.org/wp-content/uploads/2021/06/A47_Final-Report.pdf},
+{% endhighlight %}
+
+
+# Technical Objectives for 2023 Roadmap
+
+The next 12-18 month roadmap for airspace encounter model development was strongly influenced by the lessons learned from training the initial terminal model described in _[Correlated Bayesian Model of Aircraft Encounters in the Terminal Area Given a Straight Takeoff or Landing](https://www.mdpi.com/2226-4310/9/2/58)_ and three recent articles: _[Inferring Traffic Models in Terminal Airspace from Flight Tracks and Procedures](https://arxiv.org/abs/2303.09981)_ by Jung and Kochenderfer; _[Deep generative modelling of aircraft trajectories in terminal maneuvering areas](https://doi.org/10.1016/j.mlwa.2022.100446)_ by Krauth et al.; and [_Leveraging Public Aeronautical Data to Characterize Aircraft Traffic Intent_](https://zenodo.org/record/6390978) by Weinert et al. 
+
+As part of the FAA A11L.UAS.2 research task, the 2023 roadmap has been aligned to support RTCA SC-147 and SC-228 activities to develop DAA and collision avoidance systems to mitigate collision risk in Class B airspaces surrounding the busiest airports, such as Los Angeles International Airport (LAX), or in the low altitude airspace of metropolises, like Los Angeles, Miami, or New York City. Because Class B airspace is surrounded by a Mode C veil  (with requirements for transponders and ADS-B Out equipment), where many low altitude drone operations are planned, we anticipate 2023 roadmap activities will also support the ASTM F38 activities, and specifically revisions of the ASTM DAA performance standard ([ASTM F3442/F3442M](https://www.doi.org/10.1520/F3442_F3442M-20)) and planned first publication of test methods for DAA ([ASTM WK62669](https://www.astm.org/workitem-wk62669)).
+
+## Class B Airspace, Mode C Veil, and Metropolises
+
+As directed by the FAA UAS Integration Office, development will prioritize Class B airspace and Mode C veils, as formally defined by the FAA. We generalize this as metropolitan airspace. First, in the [Pilot's Handbook of Aeronautical Knowledge](https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/phak/media/17_phak_ch15.pdf), the FAA defines Class B airspace as the following:
+> Class B airspace is generally airspace from the surface to 10,000 feet MSL surrounding the nation’s busiest airports in terms of airport operations or passenger enplanements. The configuration of each Class B airspace area is individually tailored, consists of a surface area and two or more layers (some Class B airspace areas resemble upside-down wedding cakes), and is designed to contain all published instrument procedures once an aircraft enters the airspace. ATC clearance is required for all aircraft to operate in the area, and all aircraft that are so cleared receive separation services within the airspace.
+
+Next, in the United States, each Class B airport is supported by a [Mode C veil](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/chap3_section_2.html), which is defined by the FAA as:
+>   The airspace within 30 nautical miles of an airport listed in [Appendix D, Section 1 of 14 CFR Part 91](https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-91/appendix-Appendix%20D%20to%20Part%2091) (generally primary airports within Class B airspace areas), from the surface upward to 10,000 feet MSL. Unless otherwise authorized by ATC, aircraft operating within this airspace must be equipped with an operable radar beacon transponder with automatic altitude reporting capability and operable ADS-B Out equipment.
+However, aircraft that were not originally certificated with an engine-driven electrical system or that have not subsequently been certified with a system installed may conduct operations within a Mode C veil provided the aircraft remains outside Class A, B or C airspace; and below the altitude of the ceiling of a Class B or Class C airspace area designated for an airport or 10,000 feet MSL, whichever is lower.
+
+Specifically, there are 37 United States locations, defined in [Appendix D, Section 1 of 14 CFR Part 91](https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-91/appendix-Appendix%20D%20to%20Part%2091), with a Class B airport and Mode C veil. 
+
+|  Location (Airport)    |  Location (Airport)     |
+| :--- | :--- |
+| Atlanta, GA (Hartsfield-Jackson Atlanta International Airport) | Memphis, TN (Memphis International Airport)  |
+| Baltimore, MD (Baltimore/Washington International Thurgood Marshall Airport) | Miami, FL (Miami International Airport)  |
+| Boston, MA (General Edward Lawrence Logan International Airport) | Minneapolis, MN (Minneapolis-St. Paul International/Wold-Chamberlain Airport) |
+| Camp Springs, MD (Joint Base Andrews) | Newark, NJ (Newark Liberty International Airport) |
+| Chantilly, VA (Washington Dulles International Airport) | New Orleans, LA (Louis Armstrong New Orleans International Airport) |
+| Charlotte, NC (Charlotte/Douglas International Airport) | New York, NY (John F. Kennedy International Airport) |
+| Chicago, IL (Chicago-O'Hare International Airport) | New York, NY (LaGuardia Airport) |
+| Cleveland, OH (Cleveland-Hopkins International Airport) | Orlando, FL (Orlando International Airport) | 
+| Covington, KY (Cincinnati/Northern Kentucky International Airport) | Philadelphia, PA (Philadelphia International Airport) |
+| Dallas, TX (Dallas/Fort Worth International Airport) | Phoenix, AZ (Phoenix Sky Harbor International Airport) |
+| Denver, CO (Denver International Airport) | Pittsburgh, PA (Pittsburgh International Airport) |
+| Detroit, MI (Detroit Metropolitan Wayne County Airport) | St. Louis, MO (Lambert-St. Louis International Airport) |
+| Honolulu, HI (Honolulu International Airport) | Salt Lake City, UT (Salt Lake City International Airport) |
+| Houston, TX (George Bush Intercontinental/Houston Airport) | San Diego, CA (Miramar Marine Corps Air Station) |
+| Houston, TX (William P. Hobby Airport) | San Diego, CA (San Diego International Airport) |
+| Kansas City, MO (Kansas City International Airport) | San Francisco, CA (San Francisco International Airport) |
+| Las Vegas, NV (McCarran International Airport) | Seattle, WA (Seattle-Tacoma International Airport) |
+| Los Angeles, CA (Los Angeles International Airport) | Tampa, FL (Tampa International Airport) | 
+| Washington, DC (Ronald Reagan Washington National Airport) | |
+
+These airports support many of the most populous metropolitan areas in North America and whose complex airspaces include tall man-made obstacles, special VFR operations (i.e., helicopter tours), different airspace classes, and heterogenous aerodromes (traditional airports, vertiports, seaplane bases) in close proximity. [For example](https://aeronav.faa.gov/visual/02-23-2023/PDFs/New_York_TAC.pdf), an aircraft can be in Class E airspace and less than 5 nautical miles from the end of the runway at Newark Liberty International (EWR), a Class B airport, and also from the Downtown Manhattan/Wall Street Heliport (KJRB). This aircraft could encounter an aircraft taking-off from EWR or encounter an aircraft flying a helicopter tour route around New York City. 
+
+<img src="../assets/images/2023-03_nytac_crop_ewr.png" alt="Cropped New York special flight rules area from the February 2023 FAA New York terminal area chart">
+
+This illustrates that aircraft behavior in Class B airspace is likely dependent upon interactions with aircraft and obstacles outside of Class B airspace. We generalize these interactions as associated with metropolitan airspace, which we define as the Class B airspace and the surrounding 5-10 nautical miles from the edge of the Class B surface volume. Because the volume of Class B airspace isn't constant across all locations, we defined a general range extending from the edge to characterize aircraft over the most populated dense areas or complex airspaces interactions.
+
+## "Rejecting" Rejection Sampling
+
+Based on lessons learned from training the terminal model and from a decade of using the uncorrelated models of traditional aircraft, a foundational objective for CY2023 research is minimizing the use of rejection sampling to generate trajectories. A major challenge of the current Bayesian Networks is the reliance on rejection sampling to produce realistic trajectories. For more than a decade, rejection sampling has been recommended by MIT LL because the altitude layer and velocity were not dynamically modeled over time. When sampling the model, the sample from the initial network of altitude layer and velocity was used for every timestep from (t) to (t + n) when sampling the transition network. A 6 degrees of freedom Euler simulation used the sampled initial position and rates to propogate the altitude layer and velocity for simulated trajectory. This approach is problematic for low altitude aircraft because there are no variables representing terrain or obstacles. Naively sampling the model could result in negative above ground level (AGL) altitudes with a simulated controlled flight into terrain (CFIT) or unbounded velocities that could not sustain flight or were unrealistic. 
+
+This rejection sampling can be computationally burdensome, hinder technology transition, and does not guarantee the distribution of sampled trajectories are representative of the trained model. Rejection sampling can also inadvertently modify the distributions of the other variables that constitute the encounter model. In response, the CY2023 update of the uncorrelated models in version 3.0 of `em-model-manned-bayes`, have altitude encoded in the transition network and the transition network timestep was changed from (t + 1) to (t + 5) seconds. This change, along with the finer altitude discretization, directly addresses the frequency of simulated CFITs and reduces the reliance on rejection sampling to consistently generate valid very low altitude trajectories. However, due to dimensionality concerns and impractical memory requirements, velocity was not added to the transition network and rejection sampling is still recommended. Accordingly, improvements to model sampling will be included in the new roadmap.  
+
+## Leveraging Community AI/ML Research 
+
+We updated our roadmap based on recent lessons learned from [Jung and Kochenderfer](https://arxiv.org/abs/2303.09981) and [Krauth et al.](https://doi.org/10.1016/j.mlwa.2022.100446). These were selected due to their contributions and release of open source software to leverage the research.
+
+Jung and Kochenderfer trained probabilistic GMMs, for each segment along airport procedures to learn the deviations of aircraft trajectories from their procedures. [Murça and de Oliveira](https://doi.org/10.1109/DASC50938.2020.9256644) and [Choi et al.](https://doi.org/10.2514/1.I011128) have also recently trained GMMs to model aircraft behavior in the terminal environment. Similarly, Krauth et al. trained variational autoencoders (VAEs), an artificial neural network architecture, to learn the variability of aircraft behavior for specific features. Jung and Kochenderfer explicitly defined the procedural segments and organized the training data of trajectories into arrivals, departures, and overflights. Krauth et al. did not define procedural segments as part of model training and only trained using landing trajectories. Both trained a model for a single airport and not a generalized model for multiple locations. Both also illustrated extremely promising results that exceeds, under certain circumstances, a Dynamic Bayesian Network model. 
+
+Challenges generalizing were identified by Jung and Kochenderfer because their current approach is unable to incorporate different characteristics of each airport procedure. If a procedure has distinctively different characteristics than the training data, the GMMs are only representative of procedures similar to the training data, and are not generalizable of any procedures with distinctively different characteristics. They also note that trajectories are sampled independently and that their multiple trajectory model does not consider whether the trajectories in a given scenario are correlated (aircraft behavior is dependent on air traffic control services or nearby aircraft). The VAE model presented by Krauth et al. also does not model the correlation between aircraft.
+
+## Technical Approach
+
+Our roadmap was designed to facilitate contributions of a trained Dynamic Bayesian Networks to model correlation between aircraft while further supporting the broader research and safety community by precalculating airspace-based metadata and human annotated datasets. Directed by the FAA UAS Integration Office, these contributions are first intended to directly support RTCA SC-147 and RTCA SC-228 and then by the broader community response to the expected FAA notice of proposed rulemaking (NPRM) for drone regulations.
+
+Our technical approach will continue to prioritize generalizability over location specific models. This was informed by prior research that the distribution of observed aircraft speed, vertical rate, and turn rate, near two different final approach fixes (FAF) for different Class B airports, were similar given distance from the FAF and altitudes prescribed by instrument approach procedures (IAPs). [Slide 35 from the research presentation at ICNS 2022](https://doi.org/10.5281/zenodo.6390978) illustrates that speed distribution, given an altitude range based on the prescribed altitude from the FAFs of [MILTT for BOS](https://www.faa.gov/aero_docs/dtpp/2306/00058IL4R.PDF#nameddest=(BOS)) and [COWWE for EWR](https://www.faa.gov/aero_docs/dtpp/2306/00285RY4R.PDF#nameddest=(EWR)), are similar.
+
+<img src="../assets/images/2022-02-TerminalEncModel_NASR_SC228_ICNS_slide35.png" alt="Slide 35 from the ICNS 2022 presentation">
+
+We hypothesized by supplemental 4-D (time, latitude, longitude, altitude) track positions with airspace-based features, such as distance away from runway or distance from a FAF, generalized clusters of behaviors could be identified. Accordingly, the ICNS 2022 presented research was supported by a training dataset of machine annotated tracks. For each track point, we calculated the distance from waypoints, FAA reported single latitude and latitude for airports, the distance from end of runways, the relative angular difference between the true heading of the track and runway heading, and the difference between the track’s altitude and a runway’s visual glide slope. While these annotations are straightforward, to calculate these annotations for billions of track points for multiple airports over multiple months required a parallelized workflow using high performance supercomputing resources, like the Lincoln Laboratory Supercomputing Center (LLSC); a capability available to few organizations.   
+
+Our approach is threefold then. First is to train a Dynamic Bayesian Network to model the geometry of two or more aircraft at the start, conclusion, and closest point of approach of a correlated encounter. This model can then be used to seed correlated trajectories of multiple aircraft from any type of model. A separate Dynamic Bayesian Network model could be used to generate trajectories but conceptually, trajectories could be sampled from other models, such as GMMs or VAEs, based on the seed sampled from the correlated geometry model. We believe this approach offers the valued understandability of Dynamic Bayesian Networks while enabling encounter modeling to leverage recent AI/ML advances.
+ 
+Second is to release the dataset used to train this model, along with supplemental metadata and machine annotated features. Based on the research presented at ICNS 2022, we will machine annotate the relative geometry between a track position and all nearby airspace features. This provides us with a robust feature space to train the correlated geometry model but not all calculated features will ultimately be used for the new model. By releasing all features to the community, we will reduce the risk for the community to build upon our research and explore how these additional features can improve encounter modeling in general. Lastly, we are planning to release a human annotated dataset to enable high confidence supervised learning.   
+
+Lastly, we will publish guidelines and a checklist on how to leverage the encounter models based on best practices established for RTCA and the Department of Defense. This documentation is intended to help regulators review the use of the models as part of safety cases and waiver applications and also to educate users on how to successfully and appropriately sample the models to create encounters.
+
+# Related Projects
+
+The roadmap is scoped to the development and adoption of statistical models of aircraft in close encounters. There are many other efforts, including those funded by the FAA and NASA, that leverage or are synergistic with the encounter models. Because development of the encounter models can influence other efforts, we highlight a few efforts that are expected to support the ASTM and RTCA working groups and potentially inform the comments to a future notice of proposed rulemaking (NPRM) for beyond visual line of sight drone operations.
+
+## Estimated stand-off distance between ADS-B equipped aircraft and obstacles
+
+The encounter models currently and have historically been limited to interactions between aircraft; they have not represented the specific interactions between obstacles and aircraft equipped with transponders. In response and sponsored by the FAA UAS Integration Office, MIT LL calculated the standoff distance between obstacles and ADS-B equipped manned aircraft and released the results under a permissive license ([dataset](https://doi.org/10.5281/zenodo.7741273)). 
+
+Because obstacles are a prominent feature of Class B and metropolitan airspaces, we expect to conduct additional analysis of aircraft behavior with respect to obstacles. As the variables of the metropolitan encounter model have not been finalized as of April 2023, we cannot state how specifically additional obstacle analysis will be incorporated into the future encounter model; but we do expect obstacles to be reflected _somehow_ in the model. Accordingly, the obstacle analysis is a deliverable for the A11L.UAS.2 research task. We are planning to publicly release any aggregate analysis as a standalone dataset to maximize the utility of the research to the community. Future encounter model documentation will cite this future release while other FAA efforts, such as implementation of recommendations by the FAA beyond visual line of sight advisory rulemaking committee, can also leverage the results.  
+
+## Frequency of ADS-B Aircraft Operations
+
+Early in 2023, the FAA funded MIT LL to estimate the frequency of non-ADS-B out operations within the Boston-Logan Mode C Veil, where ADS-B out is largely mandated but there are waivers and exemptions to the rule ([slides](https://doi.org/10.5281/zenodo.7809507)). The FAA UAS Integration Office sponsored this work, but not specifically the FAA A11L.UAS.2 research task.
+
+Analysis of discrete transponder replies received from an ASR-9 radar that were correlated with ADS-B Out in a section of airspace near Boston for 4 Mondays in 2022: 5/23, 5/30, 6/6, 6/13. Approximately 11% of discrete code beacon replies below 1000 feet AGL and within part of the Mode C Veil did not have a correlated ADS-B reply. These results do not support preconceived assumptions about nearly complete ADS-B equipage rates inside the Boston Mode C Veil. However any conclusions are localized to this location and time and may not apply to other local airspaces or the broader national airspace system.
+
+A potential future task, but unfunded as of April 2023, would be to improve training of the statistical encounter models using the same data for this analysis that was sourced from the FAA Surveillance and Broadcast Service (SBS). If funded, we could correlate crowd-sourced ADS-B replies by the OpenSky Network, which are used for training many of the modern models, with beacon replies from air surveillance radars available through SBS. Future work could also focus on characterizing code 1200, 0200, 0000 aircraft and assess rates of specific types of operations, such as Defense Visual Flight Rules (DVFR), tour operators, search and rescue, and VFR Helicopters within the Los Angeles region that may or may not be in contact with ATC.
+
+## Simulating See and Be Seen Flight by Onboard Human Pilots
+
+As of April 2023, the FAA is funding ASSURE and MIT LL to estimate the performance of simulated pilots operating under visual flight rules and conducting see and be seen flights to mitigate midair collisions. The FAA UAS Integration Office sponsored this work, but not specifically the FAA A11L.UAS.2 research task.
+
+A public update was first provided to ASTM in 2022 ([slides](https://doi.org/10.5281/zenodo.6368015)) and simulation results by MIT LL are expected to be released in 2023. For the simulations, the uncorrelated encounter models of traditional aircraft were sampled to create pairwise encounters; and the preliminary encounters have been released under a permissive license ([dataset](https://doi.org/10.5281/zenodo.5237348)). The primary contribution of these simulations will be  guidance on how to leverage and validate the visual acquisition model of pilot see and be seen performance. This guidance will inform a series of flight test experiments to capture and evaluate human pilot performance in the cockpit with regards to CFR PART 91.113; while deriving updated requirements for the ASTM F3442 detect and avoid standard for smaller UAS.
+
+
+
+
