@@ -2,7 +2,7 @@
 layout: single
 title:  "Airspace Encounter Models 2022 Roadmap"
 date:   2021-12-10 00:00:00 -0500
-categories: roadmap
+categories: roadmap 2022
 author: Andrew Weinert
 share: true
 toc: false
